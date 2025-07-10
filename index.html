@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terry Longman - Senior Solution Architect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #15803d;
+            --secondary-color: #14532d;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --accent-color: #16a34a;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 10px 20px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        /* Main Content Sections */
+        section {
+            padding: 60px 0;
+        }
+
+        section:nth-child(even) {
+            background: var(--bg-white);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        /* Summary Section */
+        .summary {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-dark);
+            max-width: 800px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .skill-category {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .skill-category h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .skill-category li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .skill-category li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-top: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -46px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 3px solid var(--bg-light);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .timeline-header h3 {
+            color: var(--secondary-color);
+            font-size: 1.4em;
+        }
+
+        .timeline-date {
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        .company-name {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .job-description {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .achievements {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .achievements li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .achievements li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--text-dark);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .tech-stack {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-stack span {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Certifications */
+        .certifications {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .cert-badge {
+            background: var(--bg-white);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+        }
+
+        .cert-icon {
+            font-size: 2em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.8em;
+            }
+            
+            .timeline {
+                padding-left: 20px;
+            }
+            
+            .timeline-header {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>Terry Longman</h1>
+            <p class="tagline">Senior Solution Architect, Platform Engineer & DevOps Lead</p>
+            <div class="contact-info">
+                <a href="#" title="LinkedIn Profile">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#summary">Summary</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="summary">
+        <div class="container">
+            <h2>Professional Summary</h2>
+            <p class="summary">
+                Senior Solution Architect, Platform Engineer and DevOps Lead, specializing in Cloud Infrastructure for enterprise. I work closely with enterprises to understand challenges and then design and implement practical, secure and scalable solutions.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>Technical Skills & Competencies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        <li>Software Architecture & Engineering Leadership</li>
+                        <li>Stakeholder Engagement & Communication</li>
+                        <li>Solutions Architecture & System Design</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Personal Qualities</h3>
+                    <ul>
+                        <li>Strong Analytical Skills</li>
+                        <li>Excellent Communication</li>
+                        <li>Strategic Thinker</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Technical Stack</h3>
+                    <ul>
+                        <li>Cloud Platforms: Azure, AWS</li>
+                        <li>Containerization: Kubernetes, Docker, AKS</li>
+                        <li>CI/CD: Jenkins, GitLab, GitHub Actions</li>
+                        <li>IaC: Bicep, Terraform, ARM Templates</li>
+                        <li>Languages: Python, PowerShell, Node.js</li>
+                        <li>Monitoring: Prometheus, Grafana, Splunk</li>
+                        <li>Databases: MongoDB, MS SQL, Redis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2>Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Consultant</h3>
+                        <span class="timeline-date">Mar 2025 – Present</span>
+                    </div>
+                    <p class="company-name">GlobalLogic (Hitachi Group Company)</p>
+                    <p class="job-description">Full-time, Remote, United Kingdom</p>
+                    
+                    <p><strong>Client: Barclays Bank</strong></p>
+                    <ul class="achievements">
+                        <li>Architected secure, internet-facing Azure platform infrastructure meeting banking regulatory requirements</li>
+                        <li>Engineered CI/CD pipelines using Jenkins, GitLab Duo, PowerShell, and Bicep, enabling automated deployment of digital applications with integrated security scanning</li>
+                        <li>Deployed comprehensive observability stack using Azure Monitor, Application Insights, and Kafka providing real-time platform health dashboards</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>Internal: Pre-Sales & Architecture Support</strong></p>
+                    <ul class="achievements">
+                        <li>Supporting technical pre-sales efforts by translating business needs into architecture proposals</li>
+                        <li>Collaborating closely with cross-functional teams to scope project requirements, identify internal resources, and align delivery capabilities</li>
+                    </ul>
+                    
+                    <div class="tech-stack">
+                        <span>Solution Architecture</span>
+                        <span>IaC</span>
+                        <span>CI/CD</span>
+                        <span>Python</span>
+                        <span>Jenkins</span>
+                        <span>GitLab</span>
+                        <span>Kubernetes</span>
+                        <span>Redis</span>
+                        <span>Bicep</span>
+                        <span>PowerShell</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Director of Engineering</h3>
+                        <span class="timeline-date">Nov 2020 – Oct 2024</span>
+                    </div>
+                    <p class="company-name">GLM West Inc</p>
+                    <p class="job-description">Full-time, Greenwich CT, US / Consultant, Remote, UK</p>
+                    
+                    <ul class="achievements">
+                        <li>Advised private equity firms, investors, and portfolio companies on technology modernization across data, AI, infrastructure, applications, cybersecurity, and compliance</li>
+			<li>Advised across a range of regulated industries, Governement, Healthcare, Financial and Insurance.</li>
+                        <li>Architected and executed comprehensive cloud migration strategies for 15+ portfolio companies, transitioning legacy on-premise infrastructure to Azure environments, reducing operational costs by an average of 40% while improving system reliability and scalability</li>
+                        <li>Spearheaded end-to-end IT discovery and assessment initiatives across portfolio companies, analyzing existing infrastructure and designing tailored solutions architecture roadmaps that aligned technical capabilities with business objectives</li>
+                        <li>Developed custom B2B software solutions with React and Node.js, while creating Python-based automation scripts, data collection tools, and Python FastAPI API’s to streamline operations and enhance workflow efficiency across portfolio companies</li>
+                        <li>Managed enterprise AKS clusters hosting microservices, performing node pool optimization, Kubernetes upgrades, and resource management. Implemented Prometheus/Grafana monitoring and pipelines for automated deployments. Configured autoscaling, ingress controllers, SSL certificates, and pod security policies while troubleshooting failures and networking issues. Achieved 30% cost reduction through automating spot instances and right-sizing node pools</li>
+                        <li>Designed and implemented comprehensive monitoring and observability frameworks using Kafka, Splunk, Grafana and Kibana custom dashboards, enabling real-time infrastructure health tracking and proactive issue resolution across multi-cloud environments</li>
+                    </ul>
+                    
+                    <div class="tech-stack">
+                        <span>Azure</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>Python</span>
+                        <span>CI/CD</span>
+                        <span>GitHub Actions</span>
+                        <span>Kubernetes</span>
+                        <span>MongoDB</span>
+                        <span>Serverless</span>
+                        <span>Azure AI</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Manager of Infrastructure & Applications</h3>
+                        <span class="timeline-date">May 2015 – Sept 2020</span>
+                    </div>
+                    <p class="company-name">First Reserve Corporation</p>
+                    <p class="job-description">Full-time, Stamford CT, United States</p>
+                    
+                    <ul class="achievements">
+                        <li>Managed two high-performing engineering teams executing large-scale infrastructure migrations and software development for portfolio companies</li>
+                        <li>Successfully transitioning multiple enterprise organizations to Azure cloud environments, directed multi-data centre consolidation projects, migrating 200+ servers and 50TB+ of data and critical infrastructure and applications to Azure cloud while maintaining 99.9% uptime during transitions, resulting in 45% reduction in operational expenses and improved disaster recovery capabilities. including complex SaaS solutions such as Office 365 deployments ranging from 5 to 10,000+ users</li>
+                        <li>Led cross-functional teams in architecting and delivering custom HRIS solutions and AI-powered integrations with WorkDay, streamlining HR operations and reducing manual processes by 60% across multiple portfolio companies</li>
+                        <li>Spearheaded enterprise-grade security and monitoring initiatives by implementing Splunk log shipping and Microsoft Sentinel SIEM solutions, establishing centralized threat detection and compliance frameworks across diverse client environments</li>
+                        <li>Orchestrated the transformation of monolithic applications to scalable SaaS architectures using microservices and Kubernetes on Azure, enabling portfolio companies to achieve 300% improved scalability and reduced time-to-market for new features</li>
+                        <li>Overhauled organizational security policies to achieve compliance with NIST 800-53, ISO 27001, and SOC 2 frameworks. Managed investor due diligence processes by completing 20+ DDQs annually, establishing a centralized knowledge base for rapid response to security questionnaires and audit requests</li>
+                    </ul>
+                    
+                    <div class="tech-stack">
+                        <span>Azure</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>Python</span>
+                        <span>MS SQL</span>
+                        <span>Virtualization</span>
+                        <span>Containerization</span>
+                        <span>Azure DevOps</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>IT Manager</h3>
+                        <span class="timeline-date">Aug 2009 – May 2015</span>
+                    </div>
+                    <p class="company-name">First Reserve International</p>
+                    <p class="job-description">Full-time, London, United Kingdom</p>
+                    
+                    <ul class="achievements">
+                        <li>Managed European IT infrastructure operations supporting 250+ office users and 40 Windows Servers on VMware</li>
+                        <li>Led ad-hoc infrastructure projects including video conferencing system deployments and data center setup initiatives</li>
+                        <li>Developed custom Python applications for purchasing workflow automation and portfolio management tracking</li>
+                        <li>Executed enterprise software rollouts and data migration projects with minimal downtime</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Senior Engineer</h3>
+                        <span class="timeline-date">Mar 2007 – Apr 2009</span>
+                    </div>
+                    <p class="company-name">S.A.C Global Investors</p>
+                    <p class="job-description">Full-time, London, United Kingdom</p>
+                    
+                    <ul class="achievements">
+                        <li>Led IT infrastructure standardization across European offices, implementing Windows and RHEL environments</li>
+                        <li>Developed electronic trading automation using Python and VBA scripting, reducing trade execution setup time by 75%</li>
+                        <li>Engineered migration of critical back-office trade settlement systems from legacy Unix to Windows Server</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Engineer</h3>
+                        <span class="timeline-date">Mar 2000 – Dec 2006</span>
+                    </div>
+                    <p class="company-name">Lehman Brothers</p>
+                    <p class="job-description">Full-time, London, United Kingdom</p>
+                    
+                    <ul class="achievements">
+                        <li>Project managed large-scale transformations and software enhancements, including upgrades of trading platforms</li>
+                        <li>Developed and maintained scripts for deploying software applications across multiple environments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <h2>Certifications</h2>
+            <div class="certifications">
+                <div class="cert-badge">
+                    <span class="cert-icon">🛡️</span>
+                    <div>
+                        <h4>ISC² Certified Information Systems Security Professional</h4>
+                        <p>CISSP</p>
+                    </div>
+                </div>
+                <div class="cert-badge">
+                    <span class="cert-icon">☁️</span>
+                    <div>
+                        <h4>Microsoft Certified: Azure Solutions Architect Expert</h4>
+                        <p>AZ-104 & AZ-305</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add active state to navigation based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
